@@ -1,0 +1,23 @@
+<!DOCTYPE>
+<html>
+
+<head>
+    <title>Media for @{username}</title>
+</head>
+
+<body>
+    {#statuses}
+    <h2>{name} @{screen_name}</h2>
+    <div>{created_at}</div>
+    <p>{text}</p>
+    {#media} {#video_info}
+    <video muted loop controls poster="{media_url}">
+        {#variants}
+        <source src="{url}" type="{content_type}"></source>
+        {/variants}
+    </video>
+    {/video_info} {^video_info}
+    <img src="{media_url}"> {/video_info} {/media} {/statuses}
+</body>
+
+</html>

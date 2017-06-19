@@ -26,7 +26,11 @@ module.exports = class Database {
             return config && (this._connection = cloudant(config[0].credentials));
         })();
     }
+    createDatabase() {
+        this.connection.db.create(this.name);
+        return this._database = this.connection.db.use(this.name);
+    }
     get db() {
-        return this._database || (() => this.connection.db.create(this.name), this._database = this.connection.db.use(this.name))();
+        return this._database || this.createDatabase();
     }
 }

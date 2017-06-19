@@ -1,0 +1,28 @@
+{
+    "view engines": {
+        "dust": {
+            "module": "adaro",
+            "renderer": {
+                "method": "dust",
+                "arguments": [
+                    {
+                        "cache": true,
+                        "helpers": "config:dust.helpers"
+                    }
+                ]
+            }
+        },
+        "js": {
+            "module": "adaro",
+            "renderer": {
+                "method": "js",
+                "arguments": [
+                    {
+                        "cache": true,
+                        "helpers": "config:dust.helpers"
+                    }
+                ]
+            }
+        }
+    }
+}
