@@ -2,7 +2,7 @@
   "name": "hh-gallery",
   "version": "1.0.0",
   "description": "Twitter image gallery",
-  "main": "index.js",
+  "main": "app.js",
   "author": "Cory Cook",
   "license": "MIT",
   "dependencies": {
@@ -12,13 +12,17 @@
     "cloudant": "^1.8.0",
     "dotenv": "^4.0.0",
     "express": "^4.15.3",
-    "socket.io": "^2.0.2",
+    "socket.io": "^2.0.3",
+    "socket.io-client": "^2.0.3",
     "twitter": "^1.7.0"
   },
   "devDependencies": {
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb-base": "^11.2.0",
+    "eslint-plugin-import": "^2.2.0",
     "webpack": "^2.6.1"
   },
   "scripts": {
-    "start": "node ./index.js"
+    "start": "node ./app.js"
   }
 }

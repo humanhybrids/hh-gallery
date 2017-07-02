@@ -1,10 +1,16 @@
 
 const express = require('express');
-const router = express.Router();
 const client = require('./client');
 
-router.get("/", function (req, res) {
-    client.get('application/rate_limit_status', { }).then(data => res.json(data));
+const router = express.Router();
+
+router.get('/', (req, res) => {
+  client.get('application/rate_limit_status', {
+  }).then((data) => {
+    res.json(data);
+  }).catch((err) => {
+    res.status(500).json({ error: err });
+  });
 });
 
 module.exports = router;
