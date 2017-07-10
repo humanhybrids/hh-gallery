@@ -17,7 +17,9 @@
         {/variants}
     </video>
     {/video_info} {^video_info}
-    <img src="{media_url_https}"> {/video_info} {/extended_entities.media} {/statuses}
+    <img src="{media_url_https}"> {/video_info} {/extended_entities.media}
+    <div>{id_str}</div>
+    {/statuses}
 </body>
 
 </html>
