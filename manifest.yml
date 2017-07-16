@@ -1,5 +1,3 @@
 memory: 128M
 instances: 2
 name: humanhybrids
-env:
-  MODE: PROD

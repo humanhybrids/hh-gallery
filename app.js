@@ -1,17 +1,23 @@
+
 require('dotenv').config();
 const express = require('express');
 const adaro = require('adaro');
 const http = require('http');
-const twitterIndex = require('./api/twitter/index');
-const twitterMedia = require('./api/twitter/media');
+const api = require('./api/api');
 
 const app = express();
 const server = http.createServer(app);
 
 app.engine('dust', adaro.dust());
-app.use('/api/twitter', twitterIndex);
-app.use('/api/twitter/media', twitterMedia);
 app.set('view engine', 'dust');
+
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', 'https://humanhybrids.io');
+  res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  next();
+});
+
+app.use('/api', api);
 
 const hostname = process.env.HOSTNAME || 'localhost';
 const port = process.env.PORT || 3000;

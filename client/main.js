@@ -1,4 +1,4 @@
 
-const client = require('socket.io-client');
+import { client } from 'socket.io-client';
 
 window.io = client();
