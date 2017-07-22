@@ -1,0 +1,91 @@
+swagger: '2.0'
+info:
+  title: humanhybrids API
+  description: yep
+  version: 1.0.0
+
+host: humanhybrids.mybluemix.net
+basePath: /
+schemes:
+- https
+
+paths:
+  /gallery:
+    get:
+      summary: Get recent Twitter images.
+      description: Get recent Twitter images for @MikePanoots
+      produces:
+      - application/json
+      - text/html
+      parameters:
+      - in: query
+        name: max
+        required: false
+        type: string
+        description: If provided, limits query to images with id at most max
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: "#/definitions/MediaSearch"
+
+definitions:
+  MediaSearch:
+    type: object
+    properties:
+      statuses:
+        type: array
+        items:
+          $ref: "#/definitions/MediaStatus"
+  MediaStatus:
+    type: object
+    properties:
+      created:
+        type: string
+        format: date
+      tags:
+        type: array
+        items:
+          type: string
+      id:
+        type: string
+      images:
+        type: array
+        items:
+          $ref: "#/definitions/Image"
+      text:
+        type: string
+      userid:
+        type: string
+      username:
+        type: string
+      video:
+        $ref: "#/definitions/Video"
+  Image:
+    type: object
+    properties:
+      id: 
+        type: string
+      url: 
+        type: string
+      sizes:
+        type: array
+        items:
+          type: string
+          enum: [large, thumb, medium, small]
+  Video:
+    type: object
+    properties:
+      thumb:
+        type: string
+      src:
+        type: array
+        items:
+          $ref: "#/definitions/VideoSource"
+  VideoSource:
+    type: object
+    properties:
+      type: 
+        type: string
+      url: 
+        type: string

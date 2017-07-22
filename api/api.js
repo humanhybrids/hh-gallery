@@ -3,6 +3,7 @@ const express = require('express');
 
 const api = express.Router();
 
-api.use('/twitter', require('./twitter'));
+// GET /gallery
+api.use(require('./gallery'));
 
 module.exports = api;
