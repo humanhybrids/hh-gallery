@@ -12,7 +12,7 @@ app.engine('dust', adaro.dust());
 app.set('view engine', 'dust');
 
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', 'https://humanhybrids.io');
+  res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   next();
 });
