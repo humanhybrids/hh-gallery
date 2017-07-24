@@ -28,7 +28,7 @@ function transform(response, req) {
     return { created, id, text, userid, username, tags, images, video };
   });
 
-  const base = `${req.protocol}://${req.get('host')}${req.path}`;
+  const base = `https://${req.get('host')}${req.path}`;
   const first = statuses[0].id_str;
   const last = bigInt(statuses[statuses.length - 1].id_str).subtract(bigInt.one).toString();
   const links = {
