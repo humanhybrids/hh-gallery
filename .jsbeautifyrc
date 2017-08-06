@@ -1,0 +1,12 @@
+{
+  "brace_style": "collapse,preserve-inline",
+  "html": {
+    "indent_size": 2,
+    "eol": "\n"
+  },
+  "js": {
+    "indent_size": 2,
+    "eol": "\n",
+    "end_with_newline": true
+  }
+}

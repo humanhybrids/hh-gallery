@@ -55,12 +55,14 @@ definitions:
           $ref: "#/definitions/Image"
       text:
         type: string
-      userid:
-        type: string
       username:
         type: string
       video:
         $ref: "#/definitions/Video"
+      favorites:
+        type: integer
+      retweets:
+        type: integer
   Image:
     type: object
     properties:
