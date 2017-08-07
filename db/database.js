@@ -1,6 +1,6 @@
 const cfenv = require('cfenv');
 const cloudant = require('cloudant');
-const vcap = require('../vcap-local.json');
+const vcap = require('../config/vcap-local.json');
 
 module.exports = class Database {
   constructor(name) {
