@@ -2,4 +2,4 @@ extends: airbnb-base
 plugins": [import]
 rules:
     linebreak-style: off
-    
+    no-console: off
