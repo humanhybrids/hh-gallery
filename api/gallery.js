@@ -1,3 +1,4 @@
+require('./gallery-stream');
 const express = require('express');
 const client = require('./util/twitter-client');
 const { transform } = require('./util/twitter-status-parse');
