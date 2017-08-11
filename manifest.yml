@@ -1,3 +1,5 @@
 memory: 256M
 instances: 1
 name: humanhybrids
+env:
+  STREAMS_ENABLED: on

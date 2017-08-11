@@ -1,9 +1,9 @@
 require('dotenv').config();
 const adaro = require('adaro');
-const api = require('./api/api');
+const api = require('./src/api');
 const express = require('express');
 const http = require('http');
-const io = require('./api/util/io');
+const io = require('./src/util/io');
 
 const app = express();
 const server = http.createServer(app);
