@@ -1,6 +1,6 @@
 require('dotenv').config();
 const adaro = require('adaro');
-const api = require('./src/api');
+const gallery = require('./src/gallery');
 const express = require('express');
 const http = require('http');
 const io = require('./src/util/io');
@@ -18,7 +18,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(api);
+app.use(gallery);
 
 const hostname = process.env.HOSTNAME || 'localhost';
 const port = process.env.PORT || 3000;
