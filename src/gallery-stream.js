@@ -1,10 +1,17 @@
 const { mapStatus } = require('./util/twitter-status-parse');
 const io = require('./util/io');
 const log = require('./util/logger');
-const twitter = require('./util/twitter-client');
+const { client: twitter } = require('./util/twitter-client');
 
 const MIKE_USERID = 59594931;
 
+/**
+ * Twitter API only allows a single connection via streams. This will
+ * likely improve when Twitter uses web hooks instead of streaming connections.
+ * Only activate streams when deployed.
+ * Also, this will only work with a single deployed instance.
+ * TODO: Need to create a single streaming service app to provide data to API services.
+ */
 if (process.env.STREAMS_ENABLED) {
   twitter.stream('statuses/filter', { track: '@MikePanoots', follow: MIKE_USERID }, (stream) => {
     log.info('Connected to twitter stream.');

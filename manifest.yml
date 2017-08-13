@@ -3,3 +3,5 @@ instances: 1
 name: humanhybrids
 env:
   STREAMS_ENABLED: on
+  LOGIN_CALLBACK: https://humanhybrids.mybluemix.net/auth/twitter/callback
+  LOGIN_REDIRECT: https://humanhybrids.io/panoots
