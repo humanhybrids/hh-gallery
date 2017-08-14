@@ -63,10 +63,28 @@ router.get('/user/:screen_name', (req, res) => {
 });
 
 router.get('/user', (req, res) => {
-  log.debug(req.user);
   if (req.user && req.user.profile) {
     const name = '_json';
     res.json(req.user.profile[name]);
+  } else {
+    res.sendStatus(401);
+  }
+});
+
+router.post('/like/:id', (req, res) => {
+  if (req.user) {
+    getClient(req).post('/favorites/create', { id: req.params.id }).then(result => res.json(result));
+  } else {
+    res.sendStatus(401);
+  }
+});
+
+router.post('/retweet/:id', (req, res) => {
+  if (req.user) {
+    log.debug(`Sending retweet request for id ${req.params.id} for user ${req.user.profile.username}`);
+    getClient(req).post(`/statuses/retweet/${req.params.id}.json`, {})
+      .then(result => res.json(result))
+      .catch(error => res.status(500).json({ error }));
   } else {
     res.sendStatus(401);
   }
