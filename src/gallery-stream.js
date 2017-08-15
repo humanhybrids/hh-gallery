@@ -22,7 +22,7 @@ if (process.env.STREAMS_ENABLED) {
         log.trace(`dispatch SET_STATUS text: ${status.text}, created: ${status.created}`);
         io.emit('dispatch', { type: 'SET_STATUS', status: { text: status.text, created: status.created } });
       }
-      if (status.images && status.images.length > 0 && !data.retweeted) {
+      if (status.images && status.images.length > 0 && !data.retweeted_status) {
         log.trace(`dispatch PUSH_STATUS status: ${JSON.stringify(status)}`);
         io.emit('dispatch', { type: 'PUSH_STATUS', status });
       }

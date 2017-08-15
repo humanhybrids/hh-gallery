@@ -1,6 +1,6 @@
 const bigInt = require('big-integer');
 
-const mapStatus = (status) => {
+const mapStatus = (status, favorited = false, retweeted = false) => {
   const {
     entities: { media: defaultMedia = [], hashtags = [] },
     extended_entities: { media = defaultMedia } = {},
@@ -28,11 +28,15 @@ const mapStatus = (status) => {
     video,
     favorites: status.favorite_count,
     retweets: status.retweet_count,
+    favorited: status.favorited || favorited,
+    retweeted: status.retweeted || retweeted,
   };
 };
 
-const transform = (statuses, req) => {
-  const data = statuses.map(mapStatus);
+const transform = (req, statuses, favorites = [], retweets = []) => {
+  const data = statuses.map(status => (
+    mapStatus(status, favorites.includes(status.id_str), retweets.includes(status.id_str))
+  ));
   const base = `https://${req.get('host')}${req.path}`;
   const first = statuses[0].id_str;
   const last = bigInt(statuses[statuses.length - 1].id_str).subtract(bigInt.one).toString();
