@@ -8,6 +8,8 @@ const log = require('./src/util/logger');
 const passport = require('passport');
 const session = require('express-session');
 const TwitterStrategy = require('passport-twitter').Strategy;
+const graph = require('./src/graph/index');
+const { graphiqlExpress } = require('apollo-server-express');
 
 const app = express();
 const server = http.createServer(app);
@@ -45,6 +47,11 @@ app.use(passport.session());
 
 app.get('/auth/twitter', passport.authenticate('twitter'));
 app.get('/auth/twitter/callback', passport.authenticate('twitter', { successRedirect: process.env.LOGIN_REDIRECT }));
+app.use('/graph/docs', graphiqlExpress({
+  endpointURL: '/graph',
+}));
+app.use('/graph', graph);
+
 app.use(gallery);
 
 const hostname = process.env.HOSTNAME || 'localhost';

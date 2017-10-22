@@ -1,0 +1,29 @@
+
+type Query {
+    user(name: String!): User
+}
+
+type Tweet {
+    created: String
+    favoriteCount: Int
+    id: ID
+    retweetCount: Int
+    text: String
+    user: User
+}
+
+type User {
+    description: String
+    followers(cursor: ID count: Int): UserGroup
+    following(cursor: ID count: Int): UserGroup
+    id: ID
+    screenName: String
+    status: Tweet
+    timeline(from: ID count: Int): [Tweet]
+}
+
+type UserGroup {
+    nextCursor: ID
+    previousCursor: ID
+    users: [User]
+}
