@@ -21,7 +21,7 @@ module.exports = class Twitter {
   }
 
   load(options) {
-    return Promise.all(options.map(({ uri, ...opts }) => this.client.get(uri, opts)));
+    return Promise.all(options.map(option => this.client.get(option.uri, option)));
   }
   loadUsers(keys) {
     return this.client.get('users/lookup', { screen_name: keys.join(',') });
