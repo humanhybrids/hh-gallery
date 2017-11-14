@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   nextCursor(group) {
     return group.next_cursor_str;
   },

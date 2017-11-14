@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   created(tweet) {
     return tweet.created_at;
   },

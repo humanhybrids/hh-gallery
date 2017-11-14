@@ -13,21 +13,34 @@ const MIKE_USERID = 59594931;
  * TODO: Need to create a single streaming service app to provide data to API services.
  */
 if (process.env.STREAMS_ENABLED) {
-  twitter.stream('statuses/filter', { track: '@MikePanoots', follow: MIKE_USERID }, (stream) => {
-    log.info('Connected to twitter stream.');
+  twitter.stream(
+    'statuses/filter',
+    { track: '@MikePanoots', follow: MIKE_USERID },
+    stream => {
+      log.info('Connected to twitter stream.');
 
-    stream.on('data', (data) => {
-      const status = mapStatus(data);
-      if (status.userid === MIKE_USERID) {
-        log.trace(`dispatch SET_STATUS text: ${status.text}, created: ${status.created}`);
-        io.emit('dispatch', { type: 'SET_STATUS', status: { text: status.text, created: status.created } });
-      }
-      if (status.images && status.images.length > 0 && !data.retweeted_status) {
-        log.trace(`dispatch PUSH_STATUS status: ${JSON.stringify(status)}`);
-        io.emit('dispatch', { type: 'PUSH_STATUS', status });
-      }
-    });
+      stream.on('data', data => {
+        const status = mapStatus(data);
+        if (status.userid === MIKE_USERID) {
+          log.trace(
+            `dispatch SET_STATUS text: ${status.text}, created: ${status.created}`,
+          );
+          io.emit('dispatch', {
+            type: 'SET_STATUS',
+            status: { text: status.text, created: status.created },
+          });
+        }
+        if (
+          status.images &&
+          status.images.length > 0 &&
+          !data.retweeted_status
+        ) {
+          log.trace(`dispatch PUSH_STATUS status: ${JSON.stringify(status)}`);
+          io.emit('dispatch', { type: 'PUSH_STATUS', status });
+        }
+      });
 
-    stream.on('error', error => log.error(error));
-  });
+      stream.on('error', error => log.error(error));
+    },
+  );
 }

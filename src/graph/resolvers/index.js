@@ -1,8 +1,8 @@
-const Query = require('./Query');
-const Tweet = require('./Tweet');
-const User = require('./User');
+import Query from './Query';
+import Tweet from './Tweet';
+import User from './User';
 
-module.exports = {
+export default {
   Query,
   Tweet,
   User,

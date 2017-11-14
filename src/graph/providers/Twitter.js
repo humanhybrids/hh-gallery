@@ -1,11 +1,13 @@
-const TwitterClient = require('twitter');
-const DataLoader = require('dataloader');
+import TwitterClient from 'twitter';
+import DataLoader from 'dataloader';
 
 function serializeKey(key) {
-  return Object.keys(key).map(id => key[id]).join('-');
+  return Object.keys(key)
+    .map(id => key[id])
+    .join('-');
 }
 
-module.exports = class Twitter {
+export default class Twitter {
   constructor({
     token = process.env.TWITTER_ACCESS_TOKEN_KEY,
     tokenSecret = process.env.TWITTER_ACCESS_TOKEN_SECRET,
@@ -16,12 +18,16 @@ module.exports = class Twitter {
       access_token_key: token,
       access_token_secret: tokenSecret,
     });
-    this.loader = new DataLoader(options => this.load(options), { serializeKey });
+    this.loader = new DataLoader(options => this.load(options), {
+      serializeKey,
+    });
     this.userLoader = new DataLoader(keys => this.loadUsers(keys));
   }
 
   load(options) {
-    return Promise.all(options.map(option => this.client.get(option.uri, option)));
+    return Promise.all(
+      options.map(option => this.client.get(option.uri, option)),
+    );
   }
   loadUsers(keys) {
     return this.client.get('users/lookup', { screen_name: keys.join(',') });
@@ -33,4 +39,4 @@ module.exports = class Twitter {
   getUser(name) {
     return this.userLoader.load(name);
   }
-};
+}
